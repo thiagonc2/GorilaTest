@@ -1,5 +1,6 @@
 # Python Script to calculate a CDB invesment, considering the initial investment date, the CDB rate, ...
 # an evaluation date and the CDI daily rate from a csv file
+# comment test
 
 __author__ = "Thiago Neves"
 __copyright__ = ""
