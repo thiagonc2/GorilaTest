@@ -1,7 +1,6 @@
 # Python Script to calculate a CDB invesment, considering the initial investment date, the CDB rate, ...
 # an evaluation date and the CDI daily rate from a csv file
-# comment test
-
+#Test3
 __author__ = "Thiago Neves"
 __copyright__ = ""
 __credits__ = ["Thiago Neves"]
@@ -59,7 +58,13 @@ def main_page():
             cdiRates = cdiRates2
 
         # Return a HTML page, with the input form and the graphic
-        return render_template('line_chart2.html', values=unitPrices, values2=cdiRates, labels=dates, legend=legend, legend2=legend2)
+        return render_template('line_chart2.html', values=unitPrices, values2=cdiRates,
+                                labels=dates, legend=legend, legend2=legend2,
+                                invDate = str(request.form["date-start"]),
+                                evDate = str(request.form["date-end"]),
+                                cdbRate = str(request.form["cdbRate"]),
+                                totalYield = fromCalculator[4],
+                                finalValue = fromCalculator[2])
 
     # Return a HTML with chart but no data
-    return render_template('line_chart2.html', values=unitPrices, labels=dates, legend=legend, legend2=legend2)
+    return render_template('line_chart2.html', legend=legend, legend2=legend2)

@@ -16,7 +16,7 @@ from datetime import datetime, timedelta
         # outputUnitPrices: 
         # currentPrice: 
 
-debug = True
+debug = False
 
 def cdbCalculator(investmentDate, cdbRate, currentDate):
 
@@ -54,8 +54,6 @@ def cdbCalculator(investmentDate, cdbRate, currentDate):
             line_count += 1
 
         # Verify if the evaluation day was found in the list, if not, decrease to meet a valid day
-        print(currentDate)
-        print(currentDateLine)
         if currentDateLine == 0:
             currentDate = datetime.strptime(currentDate, "%Y-%m-%d")
             currentDate = currentDate - timedelta(1)
@@ -63,8 +61,6 @@ def cdbCalculator(investmentDate, cdbRate, currentDate):
             currentHoly = 1
 
         # Verify if the start day was found in the list, if not, increase to meet a valid day
-        print(investmentDate)
-        print(investmentDateLine)
         if investmentDateLine == 0:
             investmentDate = datetime.strptime(investmentDate, "%Y-%m-%d")
             investmentDate = investmentDate - timedelta(1)
@@ -104,8 +100,11 @@ def cdbCalculator(investmentDate, cdbRate, currentDate):
     # Get CDB price in the evaluation date
     currentPrice = outputUnitPrices[-1]
 
+    # Total yield rate (%)
+    totalYield = ((currentPrice - 1000)/1000)*100
+
     # Return outputs for chart and csv output file
-    return (outputDates, outputUnitPrices, currentPrice, outputRates)
+    return (outputDates, outputUnitPrices, currentPrice, outputRates, totalYield)
 
 # Output testing
 if debug == True:
