@@ -103,6 +103,7 @@ def cdbCalculator(investmentDate, cdbRate, currentDate):
     # Total yield rate (%)
     totalYield = ((currentPrice - 1000)/1000)*100
     
+    # Write results for output
     with open('database_download/results.csv', 'w', newline = '') as result_file:
         result_writer = csv.writer(result_file, delimiter=";")
 
