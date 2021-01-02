@@ -1,6 +1,5 @@
 # Python Script to calculate a CDB invesment, considering the initial investment date, the CDB rate, ...
 # an evaluation date and the CDI daily rate from a csv file
-#Test3
 
 __author__ = "Thiago Neves"
 __copyright__ = ""
@@ -20,23 +19,22 @@ app.config["DEBUG"] = True
 
 @app.route("/", methods=["GET", "POST"])
 def main_page():
-    
     # Initial graphic preparing
     legend = 'Unit Prices (R$) - Initial Value: R$ 1000'
     legend2 = 'CDI Day Rate (%)'
 
     if request.method == "POST":
-        #input_file = request.files["input_file"]
-        #input_data = input_file.stream.read().decode("utf-8")
-        #output_data = process_data(input_data)
-        #response = make_response(output_data)
-        #response.headers["Content-Disposition"] = "attachment; filename=result.csv"
-
+        
         # Prepare graphic variables with the cdbCalculator output
         fromCalculator = cdbCalculator(str(request.form["date-start"]), float(request.form["cdbRate"]), str(request.form["date-end"]))
         dates = fromCalculator[0]
         unitPrices = fromCalculator[1]
         cdiRates = fromCalculator[3]
+
+        response = make_response(fromCalculator)
+        response.headers["Content-Disposition"] = "attachment; filename=result.csv"
+
+        return response
 
         # If there are more than 100 points to display, equally space the list for performance purpose
         if len(dates) > 100:
