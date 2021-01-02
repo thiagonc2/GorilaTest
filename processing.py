@@ -4,6 +4,8 @@ import csv
 import datetime
 # math for datetime objects
 from datetime import datetime, timedelta
+# Function to truncate float numbers
+import ownMath
 
 # Creates a function for CDB calculation
     # Inputs:
@@ -15,10 +17,12 @@ from datetime import datetime, timedelta
         # outputDates: 
         # outputUnitPrices: 
         # currentPrice: 
+        # outputRates
+        # totalYield
 
 debug = False
 
-def cdbCalculator(investmentDate, cdbRate, currentDate):
+def cdbCalculator(investmentDate, cdbRate, currentDate, filePath):
 
     # Variables initialization
     currentDateLine = 0
@@ -74,7 +78,6 @@ def cdbCalculator(investmentDate, cdbRate, currentDate):
     # Update the list only with days and CDI values within the user evaluation range
     cdiData = cdiData[(currentDateLine-currentHoly):(investmentDateLine-startHoly)]
     #cdiData = cdiData[(currentDateLine):(investmentDateLine)]
-    print(currentDateLine)
 
     # Create a list with daily TCD
     for row in range(len(cdiData)-1,-1,-1):
@@ -84,9 +87,9 @@ def cdbCalculator(investmentDate, cdbRate, currentDate):
     line_count3 = 0
     for x in tcdi:
         if line_count3 == 0:
-            tcdiA.append(round((1+(tcdi[line_count3]*(cdbRate/100))),16))
+            tcdiA.append(ownMath.truncate((1+(tcdi[line_count3]*(cdbRate/100))),16))
         else:
-            tcdiA.append(round((1+(tcdi[line_count3]*(cdbRate/100)))*tcdiA[line_count3-1], 16))
+            tcdiA.append(ownMath.truncate((1+(tcdi[line_count3]*(cdbRate/100)))*tcdiA[line_count3-1], 16))
         line_count3 += 1
 
     # Organize and and create output lists
@@ -98,17 +101,19 @@ def cdbCalculator(investmentDate, cdbRate, currentDate):
         line_count4 += 1
 
     # Get CDB price in the evaluation date
-    currentPrice = outputUnitPrices[-1]
+    currentPrice = round(outputUnitPrices[-1],2)
 
     # Total yield rate (%)
-    totalYield = ((currentPrice - 1000)/1000)*100
+    totalYield = round(((currentPrice - 1000)/1000)*100,2)
     
+    # + '_' + datetime.now().strftime("%Y.%m.%d_%H.%M")
+
     # Write results for output
-    with open('database_download/results.csv', 'w', newline = '') as result_file:
+    with open('database_download/' + filePath, 'w', newline = '') as result_file:
         result_writer = csv.writer(result_file, delimiter=";")
 
         for i in range(0,len(outputDates),1):
-            result_writer.writerow([outputDates[i],outputUnitPrices[i]])
+            result_writer.writerow([outputDates[i],round(outputUnitPrices[i],2)])
 
     # Return outputs for chart and csv output file
     return(outputDates, outputUnitPrices, currentPrice, outputRates, totalYield)
@@ -118,5 +123,6 @@ if debug == True:
     investmentDate = "2010-01-09"
     cdbRate = 100
     currentDate = "2019-11-30"
-    testOutput = cdbCalculator(investmentDate, cdbRate, currentDate)
+    filePath = 'results' + '_' + datetime.now().strftime("%Y.%m.%d_%H.%M") + '.csv'
+    testOutput = cdbCalculator(investmentDate, cdbRate, currentDate, filePath)
     #print(testOutput)

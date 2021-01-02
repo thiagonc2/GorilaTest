@@ -12,6 +12,14 @@ __status__ = "Prototype"
 
 from flask import Flask, make_response, request, render_template, send_from_directory
 from processing import cdbCalculator
+# converts string to datetime object and vice-versa
+import datetime
+# math for datetime objects
+from datetime import datetime, timedelta
+import logging
+
+logging.basicConfig(filename='cdbCalculator.log')
+logging.basicConfig(level=logging.INFO)
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
@@ -24,8 +32,10 @@ def main_page():
 
     if request.method == "POST":
         
+        filePath = 'results' + '_' + datetime.now().strftime("%Y.%m.%d_%H.%M.%S") + '.csv'
+
         # Prepare graphic variables with the cdbCalculator output
-        fromCalculator = cdbCalculator(str(request.form["date-start"]), float(request.form["cdbRate"]), str(request.form["date-end"]))
+        fromCalculator = cdbCalculator(str(request.form["date-start"]), float(request.form["cdbRate"]), str(request.form["date-end"]), filePath)
         dates = fromCalculator[0]
         unitPrices = fromCalculator[1]
         cdiRates = fromCalculator[3]
@@ -58,11 +68,13 @@ def main_page():
                                 cdbRate = str(request.form["cdbRate"]),
                                 totalYield = fromCalculator[4],
                                 finalValue = fromCalculator[2],
-                                filename='results.csv')
+                                filename = filePath,
+                                downBtn='false')
 
     # Return a HTML with chart but no data
-    return render_template('line_chart2.html', legend=legend, legend2=legend2)
+    return render_template('line_chart2.html', legend=legend, legend2=legend2, downBtn='true')
 
+# Page for results Downloads
 @app.route('/database_download/<path:filename>')
 def database_download(filename):
 

@@ -47,14 +47,10 @@
     <h3> Temporal Analysis</h3>
 
     <!-- Create a chart and its attributes -->
-	<div style="width:40%;"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+	<div style="width:60%;"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
 		<canvas id="canvas" width="600" height="400"></canvas>
-        <script> </script>
 	</div>
 	<script>
-        // Global parameters:
-        // do not resize the chart canvas when its container does (keep at 600x400px)
-        Chart.defaults.global.responsive = false;
 
 		var lineChartData = {
             labels : [{% for item in labels %}
@@ -143,7 +139,16 @@
 			});
 		};
 	</script>
+    
+    <!-- Create a button for Download the results -->
+    <p><form action="{{ url_for('database_download', filename=filename) }}">
+        <input type="submit" value="Download your results" id="theBtn" />
+    </form></p>
 
-    <button id="myBtn"> <a href="{{ url_for('database_download', filename=filename) }}">Download</a> </button>
+    <!-- Disable the download button if there is no processed data yet-->
+    <br><br>
+    <script> 
+        document.getElementById("theBtn").disabled = {{downBtn}};
+    </script>
 
 </body></html>
