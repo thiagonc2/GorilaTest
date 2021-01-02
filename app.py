@@ -10,8 +10,7 @@ __maintainer__ = "Thiago Neves"
 __email__ = "thiago.nc2@gmail.com"
 __status__ = "Prototype"
 
-from flask import Flask, make_response, request
-from flask import render_template
+from flask import Flask, make_response, request, render_template, send_from_directory
 from processing import cdbCalculator
 
 app = Flask(__name__)
@@ -30,11 +29,6 @@ def main_page():
         dates = fromCalculator[0]
         unitPrices = fromCalculator[1]
         cdiRates = fromCalculator[3]
-
-        response = make_response(fromCalculator)
-        response.headers["Content-Disposition"] = "attachment; filename=result.csv"
-
-        return response
 
         # If there are more than 100 points to display, equally space the list for performance purpose
         if len(dates) > 100:
@@ -63,7 +57,13 @@ def main_page():
                                 evDate = str(request.form["date-end"]),
                                 cdbRate = str(request.form["cdbRate"]),
                                 totalYield = fromCalculator[4],
-                                finalValue = fromCalculator[2])
+                                finalValue = fromCalculator[2],
+                                filename='results.csv')
 
     # Return a HTML with chart but no data
     return render_template('line_chart2.html', legend=legend, legend2=legend2)
+
+@app.route('/database_download/<path:filename>')
+def database_download(filename):
+
+    return send_from_directory('database_download', filename, as_attachment=True)

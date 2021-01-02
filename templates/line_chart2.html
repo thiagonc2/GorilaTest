@@ -34,7 +34,7 @@
     </form>
 
     <!-- Create a chart and its attributes -->
-	<div style="width:35%;"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+	<div style="width:60%;"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
 		<canvas id="canvas" style="display: block; height: 570px; width: 1140px;" width="1000" height="500" class="chartjs-render-monitor"></canvas>
 	</div>
 	<script>
@@ -125,7 +125,7 @@
 			});
 		};
 	</script>
-
-
+    
+    <a href="{{ url_for('database_download', filename=filename) }}">Download</a>
 
 </body></html>

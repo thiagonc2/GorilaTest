@@ -102,9 +102,15 @@ def cdbCalculator(investmentDate, cdbRate, currentDate):
 
     # Total yield rate (%)
     totalYield = ((currentPrice - 1000)/1000)*100
+    
+    with open('database_download/results.csv', 'w', newline = '') as result_file:
+        result_writer = csv.writer(result_file, delimiter=";")
+
+        for i in range(0,len(outputDates),1):
+            result_writer.writerow([outputDates[i],outputUnitPrices[i]])
 
     # Return outputs for chart and csv output file
-    return (outputDates, outputUnitPrices, currentPrice, outputRates, totalYield)
+    return(outputDates, outputUnitPrices, currentPrice, outputRates, totalYield)
 
 # Output testing
 if debug == True:
@@ -112,4 +118,4 @@ if debug == True:
     cdbRate = 100
     currentDate = "2019-11-30"
     testOutput = cdbCalculator(investmentDate, cdbRate, currentDate)
-    print(testOutput)
+    #print(testOutput)
