@@ -123,6 +123,6 @@ if debug == True:
     investmentDate = "2010-01-09"
     cdbRate = 100
     currentDate = "2019-11-30"
-    filePath = 'results' + '_' + datetime.now().strftime("%Y.%m.%d_%H.%M") + '.csv'
+    filePath = 'results.csv'
     testOutput = cdbCalculator(investmentDate, cdbRate, currentDate, filePath)
     #print(testOutput)

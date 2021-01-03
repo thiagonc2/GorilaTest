@@ -28,7 +28,7 @@
             <input type="date" id="end" name="date-end" value="2019-12-03" min="2010-01-04" max="2019-12-03">
 
         <p><label>CDB Rate (% of CDI):</label></p>
-            <input type="number" step=".01" name="cdbRate" required value="100.00" />
+            <input type="number" step=".1" name="cdbRate" required value="100.00" />
 
         <p><input type="submit" value="Evaluate investment in the given period" /></p>
     </form>
@@ -143,6 +143,10 @@
     <!-- Create a button for Download the results -->
     <p><form action="{{ url_for('database_download', filename=filename) }}">
         <input type="submit" value="Download your results" id="theBtn" />
+    </form></p>
+
+    <p><form action="{{ url_for('log_download', logFile=logFile) }}">
+        <input type="submit" value="Download the Log File" id="theBtn2" />
     </form></p>
 
     <!-- Disable the download button if there is no processed data yet-->

@@ -10,29 +10,40 @@ __maintainer__ = "Thiago Neves"
 __email__ = "thiago.nc2@gmail.com"
 __status__ = "Prototype"
 
-from flask import Flask, make_response, request, render_template, send_from_directory
+from flask import Flask, make_response, request, render_template, send_from_directory, jsonify
 from processing import cdbCalculator
 # converts string to datetime object and vice-versa
 import datetime
 # math for datetime objects
 from datetime import datetime, timedelta
 import logging
+from logging.handlers import RotatingFileHandler
 
-logging.basicConfig(filename='cdbCalculator.log')
-logging.basicConfig(level=logging.INFO)
-
+# Initiate App
 app = Flask(__name__)
 app.config["DEBUG"] = True
 
+# Define logging configuration, file name, path and level
+logFile = 'cdbCalculator.log'
+handler = RotatingFileHandler('log_download/' + logFile, maxBytes=1000000, backupCount=1)
+handler.setLevel(logging.NOTSET)
+app.logger.addHandler(handler)
+
+# Main page with CDB Inputs, buttons, chart results
 @app.route("/", methods=["GET", "POST"])
 def main_page():
+
+    app.logger.info('LogInfo[' + str(datetime.now()) + ']: ' + 'Main Page Opened' )
+    test = jsonify({'ip': request.remote_addr})
+
     # Initial graphic preparing
     legend = 'Unit Prices (R$) - Initial Value: R$ 1000'
     legend2 = 'CDI Day Rate (%)'
 
     if request.method == "POST":
         
-        filePath = 'results' + '_' + datetime.now().strftime("%Y.%m.%d_%H.%M.%S") + '.csv'
+        # Define result file name with current date and time
+        filePath = 'results.csv'
 
         # Prepare graphic variables with the cdbCalculator output
         fromCalculator = cdbCalculator(str(request.form["date-start"]), float(request.form["cdbRate"]), str(request.form["date-end"]), filePath)
@@ -68,14 +79,28 @@ def main_page():
                                 cdbRate = str(request.form["cdbRate"]),
                                 totalYield = fromCalculator[4],
                                 finalValue = fromCalculator[2],
-                                filename = filePath,
+                                filename = filePath, logFile = logFile,
                                 downBtn='false')
 
     # Return a HTML with chart but no data
-    return render_template('line_chart2.html', legend=legend, legend2=legend2, downBtn='true')
+    return render_template('line_chart2.html', legend=legend, legend2=legend2, downBtn='true', logFile = logFile)
 
 # Page for results Downloads
 @app.route('/database_download/<path:filename>')
 def database_download(filename):
 
-    return send_from_directory('database_download', filename, as_attachment=True)
+    # Log results Download
+    app.logger.info('LogInfo[' + str(datetime.now()) + ']: ' + 'File: ' + filename + ' Downloaded' )
+    # Return results file
+    return send_from_directory('database_download', filename, attachment_filename= 'results' + '_' + str(datetime.now()) + '.csv', as_attachment=True)
+
+# Page for log Downloads
+@app.route('/log_download/<path:logFile>')
+def log_download(logFile):
+
+    # Log logfile Download
+    app.logger.info('LogInfo[' + str(datetime.now()) + ']: ' + 'File: ' + logFile + ' Downloaded' )
+    # Return log file
+    return send_from_directory(directory='log_download', filename = logFile ,
+                                attachment_filename= 'cdbCalculator' + '_' + str(datetime.now()) + '.log',
+                                as_attachment=True)
