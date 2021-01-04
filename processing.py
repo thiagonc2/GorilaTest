@@ -5,7 +5,7 @@ import datetime
 # math for datetime objects
 from datetime import datetime, timedelta
 # Function to truncate float numbers
-import ownMath
+import truncatePython
 
 # Creates a function for CDB calculation
     # Inputs:
@@ -14,11 +14,11 @@ import ownMath
         # currentDate: date when the investment value shall be evaluated
 
     # Outputs:
-        # outputDates: 
-        # outputUnitPrices: 
-        # currentPrice: 
-        # outputRates
-        # totalYield
+        # outputDates: the dates what were used for the evaluation
+        # outputUnitPrices: the CDB unit price for each day evaluated
+        # currentPrice: the CDB price at the evaluation day
+        # outputRates: the CDI of each day
+        # totalYield: the total Yield in of the CDB at evaluation date
 
 debug = False
 
@@ -87,9 +87,9 @@ def cdbCalculator(investmentDate, cdbRate, currentDate, filePath):
     line_count3 = 0
     for x in tcdi:
         if line_count3 == 0:
-            tcdiA.append(ownMath.truncate((1+(tcdi[line_count3]*(cdbRate/100))),16))
+            tcdiA.append(truncatePython.truncate((1+(tcdi[line_count3]*(cdbRate/100))),16))
         else:
-            tcdiA.append(ownMath.truncate((1+(tcdi[line_count3]*(cdbRate/100)))*tcdiA[line_count3-1], 16))
+            tcdiA.append(truncatePython.truncate((1+(tcdi[line_count3]*(cdbRate/100)))*tcdiA[line_count3-1], 16))
         line_count3 += 1
 
     # Organize and and create output lists
@@ -112,8 +112,12 @@ def cdbCalculator(investmentDate, cdbRate, currentDate, filePath):
     with open('database_download/' + filePath, 'w', newline = '') as result_file:
         result_writer = csv.writer(result_file, delimiter=";")
 
+        result_writer.writerow(['Investment Date: ' + str(investmentDate), 'CDB Rate: ' + str(cdbRate), 'Initial Value: R$1000',
+                                'Evaluation Date: ' + str(currentDate)])
+
         for i in range(0,len(outputDates),1):
-            result_writer.writerow([outputDates[i],round(outputUnitPrices[i],2)])
+            result_writer.writerow([outputDates[i],outputUnitPrices[i]])
+            outputUnitPrices[i] = round(outputUnitPrices[i],2)
 
     # Return outputs for chart and csv output file
     return(outputDates, outputUnitPrices, currentPrice, outputRates, totalYield)

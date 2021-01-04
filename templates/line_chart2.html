@@ -4,6 +4,7 @@
 	<title>CDB Calculator - Gorila Thiago Test</title>
 	<script async="" src='static/analytics.js'></script><script src='static/Chart.min.js'></script>
 	<script src='static/utils.js'></script>
+    <link rel="icon" href='static/image.ico'>
 	<style>
 	canvas {
 		-moz-user-select: none;
@@ -11,26 +12,38 @@
 		-ms-user-select: none;
 	}
 	</style>
+    <style>
+        input[type='text'] { font-size: 60px; }
+    </style>
 <style type="text/css">/* Chart.js */
 @keyframes chartjs-render-animation{from{opacity:.99}to{opacity:1}}.chartjs-render-monitor{animation:chartjs-render-animation 1ms}.chartjs-size-monitor,.chartjs-size-monitor-expand,.chartjs-size-monitor-shrink{position:absolute;direction:ltr;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1}.chartjs-size-monitor-expand>div{position:absolute;width:1000000px;height:1000000px;left:0;top:0}.chartjs-size-monitor-shrink>div{position:absolute;width:200%;height:200%;left:0;top:0}</style></head>
 
 <body>
 
+    <!-- App Description -->
     <h1>Gorila Test Thiago: CDB Calculator</h1>
+    	<p><div> This CDB Investment Calculator is part of the application test for back-end Developer position at <a href="https://gorila.com.br/" target="_blank"> Gorila Invest company</a>. A more detailed explanation about the requirements can be found <a href="https://www.notion.so/Teste-para-desenvolvedor-back-end-pleno-fd5b6e07475e4af3bc99342c15bb3edc" target="_blank"> here</a>.
+        I appreciate the invitation to apply for this position at Gorila Invest. If you have any questions or suggestions, please contact me at following: <a href = "mailto: thiago.nc2@gmail.com">thiago.nc2@gmail.com</a>, or via <a href="https://www.linkedin.com/in/thiago-neves" target="_blank" > LinkedIn </a></div></p>
+    
+    <h2>Calculator description:</h2>
+    <p><div> This calculator evaluates the daily price of a single CDB investment given the date of the investment and the date of the evaluation.
+            The CDB default value is of R$1000.00, the CDB price is calculated for each day between the initial and final date, the available dates for evaluation are between 2010-01-04 and 2019-12-03. 
+            Once the calculation was done, one can Download the "results.csv" file. Furthermore a log file, "cdbCalculator.log", is available for Download, with the history of the application. </div></p>
+
     <h2>Define your investiment parameters:</h2>
 
     <!--Creates a form to get the user inputs: investment date, evaluation date and CDB Rate-->
     <form method="post" action=".">
          <p><label>Investment Date:</label></p>
-            <input type="date" id="start" name="date-start" value="2010-01-04" min="2010-01-04" max="2019-12-03">
+            <input type="date" id="start" name="date-start" value="2010-01-04" min="2010-01-04" max="2019-12-03" style="font-size:20px;">
 
         <p><label>Current Date:</label></p>
-            <input type="date" id="end" name="date-end" value="2019-12-03" min="2010-01-04" max="2019-12-03">
+            <input type="date" id="end" name="date-end" value="2019-12-03" min="2010-01-04" max="2019-12-03" style="font-size:20px;">
 
         <p><label>CDB Rate (% of CDI):</label></p>
-            <input type="number" step=".1" name="cdbRate" required value="100.00" />
+            <input type="number" step=".1" name="cdbRate" required value="100.0" style="font-size:20px;"/>
 
-        <p><input type="submit" value="Evaluate investment in the given period" /></p>
+        <p><input type="submit" value="Evaluate investment in the given period" style="font-size:20px;"/></p>
     </form>
     
     <h2>Your evaluation results:</h2>
@@ -52,6 +65,7 @@
 	</div>
 	<script>
 
+        // Define labels, values and characteristics for the charts
 		var lineChartData = {
             labels : [{% for item in labels %}
                    "{{item}}",
@@ -105,6 +119,7 @@
 			}]
 		};
 
+        // Define characteristics of the chart
 		window.onload = function() {
 			var ctx = document.getElementById('canvas').getContext('2d');
 			window.myLine = Chart.Line(ctx, {
@@ -142,11 +157,11 @@
     
     <!-- Create a button for Download the results -->
     <p><form action="{{ url_for('database_download', filename=filename) }}">
-        <input type="submit" value="Download your results" id="theBtn" />
+        <input type="submit" value="Download your results" id="theBtn" style="font-size:20px;"/>
     </form></p>
-
+    <!-- Create a button for Download the log file -->
     <p><form action="{{ url_for('log_download', logFile=logFile) }}">
-        <input type="submit" value="Download the Log File" id="theBtn2" />
+        <input type="submit" value="Download the Log File" id="theBtn2" style="font-size:20px;"/>
     </form></p>
 
     <!-- Disable the download button if there is no processed data yet-->

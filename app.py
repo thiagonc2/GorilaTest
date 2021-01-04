@@ -33,8 +33,8 @@ app.logger.addHandler(handler)
 @app.route("/", methods=["GET", "POST"])
 def main_page():
 
-    app.logger.info('LogInfo[' + str(datetime.now()) + ']: ' + 'Main Page Opened' )
-    test = jsonify({'ip': request.remote_addr})
+    # Log when the page is accessed
+    app.logger.info('LogInfo[' + str(datetime.now()) + ']: ' + 'Main Page Accessed ' + 'ip:' + request.remote_addr)
 
     # Initial graphic preparing
     legend = 'Unit Prices (R$) - Initial Value: R$ 1000'
@@ -50,6 +50,11 @@ def main_page():
         dates = fromCalculator[0]
         unitPrices = fromCalculator[1]
         cdiRates = fromCalculator[3]
+
+        # Register user inputs in log file
+        app.logger.info('LogInfo[' + str(datetime.now()) + ']: ' + 'User Input data ->' + ' Investment Date:' + 
+                        str(request.form["date-start"]) + ', CDB Rate:' + str(request.form["cdbRate"]) +
+                        ', Initial Value:R$1000' + ', Evaluation Date:' + str(request.form["date-end"]))
 
         # If there are more than 100 points to display, equally space the list for performance purpose
         if len(dates) > 100:
@@ -71,6 +76,10 @@ def main_page():
             unitPrices = unitPrices2
             cdiRates = cdiRates2
 
+        # Register main results in log file
+        app.logger.info('LogInfo[' + str(datetime.now()) + ']: ' + 'Results ->' + ' Total Yield: ' + 
+                        str(fromCalculator[4]) + '%' + ', Final Value: R$' + str(fromCalculator[2]))
+
         # Return a HTML page, with the input form and the graphic
         return render_template('line_chart2.html', values=unitPrices, values2=cdiRates,
                                 labels=dates, legend=legend, legend2=legend2,
@@ -81,6 +90,7 @@ def main_page():
                                 finalValue = fromCalculator[2],
                                 filename = filePath, logFile = logFile,
                                 downBtn='false')
+
 
     # Return a HTML with chart but no data
     return render_template('line_chart2.html', legend=legend, legend2=legend2, downBtn='true', logFile = logFile)
