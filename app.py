@@ -1,5 +1,5 @@
 # Python Script to calculate a CDB invesment, considering the initial investment date, the CDB rate, ...
-# an evaluation date and the CDI daily rate from a csv file .
+# an evaluation date and the CDI daily rate from a csv file.
 
 __author__ = "Thiago Neves"
 __copyright__ = ""
@@ -47,8 +47,22 @@ def main_page():
 
     if request.method == "POST":
 
+        # Ger user inputs
+        dateStartUser = str(request.form["date-start"])
+        cdbRateUser = float(request.form["cdbRate"])
+        dateEndUser = str(request.form["date-end"])
+
+        # Check if the dates are valid, if not, it means, if the evaluation date is before the start date, return page with exception
+        date1 = datetime.strptime(dateStartUser, "%Y-%m-%d")
+        date2 = datetime.strptime(dateEndUser, "%Y-%m-%d")
+        if date1 > date2:
+            return """
+                <h2>Invalid dates</h2>
+                <a href="/" > Calculate again </a>
+            """
+
         # Prepare graphic variables with the cdbCalculator output
-        fromCalculator = cdbCalculator(str(request.form["date-start"]), float(request.form["cdbRate"]), str(request.form["date-end"]))
+        fromCalculator = cdbCalculator(dateStartUser, cdbRateUser, dateEndUser)
         dates = fromCalculator[0]
         unitPrices = fromCalculator[1]
         cdiRates = fromCalculator[3]
@@ -56,8 +70,8 @@ def main_page():
 
         # Register user inputs in log file
         app.logger.info('LogInfo[' + str(datetime.now()) + ']: ' + 'User Input data ->' + ' Investment Date:' + 
-                        str(request.form["date-start"]) + ', CDB Rate:' + str(request.form["cdbRate"]) +
-                        ', Initial Value:R$1000' + ', Evaluation Date:' + str(request.form["date-end"]))
+                        dateStartUser + ', CDB Rate:' + str(cdbRateUser) +
+                        ', Initial Value:R$1000' + ', Evaluation Date:' + dateEndUser)
 
         # If there are more than 100 points to display, equally space the list for performance purpose
         if len(dates) > 100:
@@ -86,9 +100,9 @@ def main_page():
         # Return a HTML page, with the input form and the graphic
         return render_template('line_chart2.html', values=unitPrices, values2=cdiRates,
                                 labels=dates, legend=legend, legend2=legend2,
-                                invDate = str(request.form["date-start"]),
-                                evDate = str(request.form["date-end"]),
-                                cdbRate = str(request.form["cdbRate"]),
+                                invDate = dateStartUser,
+                                evDate = dateEndUser,
+                                cdbRate = cdbRateUser,
                                 totalYield = fromCalculator[4],
                                 finalValue = fromCalculator[2],
                                 filename = filePath, logFile = logFile,
