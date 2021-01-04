@@ -6,6 +6,7 @@ import datetime
 from datetime import datetime, timedelta
 # Function to truncate float numbers
 import truncatePython
+import glob, os
 
 # Creates a function for CDB calculation
     # Inputs:
@@ -20,9 +21,13 @@ import truncatePython
         # outputRates: the CDI of each day
         # totalYield: the total Yield in of the CDB at evaluation date
 
-debug = False
+debug = True
 
-def cdbCalculator(investmentDate, cdbRate, currentDate, filePath):
+def cdbCalculator(investmentDate, cdbRate, currentDate):
+
+    # Delete file to prevent Browser Downloading the same file, once the address is the same
+    for file in glob.glob("database_download/*.csv"):
+        os.remove(file)
 
     # Variables initialization
     currentDateLine = 0
@@ -106,10 +111,11 @@ def cdbCalculator(investmentDate, cdbRate, currentDate, filePath):
     # Total yield rate (%)
     totalYield = round(((currentPrice - 1000)/1000)*100,2)
     
-    # + '_' + datetime.now().strftime("%Y.%m.%d_%H.%M")
+    # File Path for download results
+    filePath = 'results_' + '_' + datetime.now().strftime("%Y.%m.%d_%H.%M.%S") + '.csv'
 
     # Write results for output
-    with open('database_download/' + filePath, 'w', newline = '') as result_file:
+    with open('database_download/' + filePath, 'w+', newline = '') as result_file:
         result_writer = csv.writer(result_file, delimiter=";")
 
         result_writer.writerow(['Investment Date: ' + str(investmentDate), 'CDB Rate: ' + str(cdbRate), 'Initial Value: R$1000',
@@ -120,13 +126,12 @@ def cdbCalculator(investmentDate, cdbRate, currentDate, filePath):
             outputUnitPrices[i] = round(outputUnitPrices[i],2)
 
     # Return outputs for chart and csv output file
-    return(outputDates, outputUnitPrices, currentPrice, outputRates, totalYield)
+    return(outputDates, outputUnitPrices, currentPrice, outputRates, totalYield, filePath)
 
 # Output testing
 if debug == True:
     investmentDate = "2010-01-09"
     cdbRate = 100
     currentDate = "2019-11-30"
-    filePath = 'results.csv'
-    testOutput = cdbCalculator(investmentDate, cdbRate, currentDate, filePath)
+    testOutput = cdbCalculator(investmentDate, cdbRate, currentDate)
     #print(testOutput)

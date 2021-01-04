@@ -18,6 +18,8 @@ import datetime
 from datetime import datetime, timedelta
 import logging
 from logging.handlers import RotatingFileHandler
+import glob, os
+from shutil import copyfile
 
 # Initiate App
 app = Flask(__name__)
@@ -25,13 +27,16 @@ app.config["DEBUG"] = True
 
 # Define logging configuration, file name, path and level
 logFile = 'cdbCalculator.log'
-handler = RotatingFileHandler('log_download/' + logFile, maxBytes=1000000, backupCount=1)
+handler = RotatingFileHandler(logFile, maxBytes=1000000, backupCount=1)
 handler.setLevel(logging.NOTSET)
 app.logger.addHandler(handler)
 
 # Main page with CDB Inputs, buttons, chart results
 @app.route("/", methods=["GET", "POST"])
 def main_page():
+
+    # Rename log file to prevent downloading the same file
+    logFile = 'cdbCalculator_' + datetime.now().strftime("%Y.%m.%d_%H.%M.%S") + '.log'
 
     # Log when the page is accessed
     app.logger.info('LogInfo[' + str(datetime.now()) + ']: ' + 'Main Page Accessed ' + 'ip:' + request.remote_addr)
@@ -41,15 +46,13 @@ def main_page():
     legend2 = 'CDI Day Rate (%)'
 
     if request.method == "POST":
-        
-        # Define result file name with current date and time
-        filePath = 'results.csv'
 
         # Prepare graphic variables with the cdbCalculator output
-        fromCalculator = cdbCalculator(str(request.form["date-start"]), float(request.form["cdbRate"]), str(request.form["date-end"]), filePath)
+        fromCalculator = cdbCalculator(str(request.form["date-start"]), float(request.form["cdbRate"]), str(request.form["date-end"]))
         dates = fromCalculator[0]
         unitPrices = fromCalculator[1]
         cdiRates = fromCalculator[3]
+        filePath = fromCalculator[5]
 
         # Register user inputs in log file
         app.logger.info('LogInfo[' + str(datetime.now()) + ']: ' + 'User Input data ->' + ' Investment Date:' + 
@@ -102,15 +105,21 @@ def database_download(filename):
     # Log results Download
     app.logger.info('LogInfo[' + str(datetime.now()) + ']: ' + 'File: ' + filename + ' Downloaded' )
     # Return results file
-    return send_from_directory('database_download', filename, attachment_filename= 'results' + '_' + str(datetime.now()) + '.csv', as_attachment=True)
+    return send_from_directory('database_download', filename, as_attachment=True)
 
 # Page for log Downloads
 @app.route('/log_download/<path:logFile>')
 def log_download(logFile):
 
+    # Delete file to prevent Browser Downloading the same file, once the address is the same
+    for file in glob.glob("log_download/*.log"):
+        os.remove(file)
+
+    # Create a copy of the log when download in order to avoid the Browser Download the same file
+    logFile = 'cdbCalculator_' + datetime.now().strftime("%Y.%m.%d_%H.%M.%S") + '.log'
+    copyfile('cdbCalculator.log', 'log_download/' + logFile)
+
     # Log logfile Download
     app.logger.info('LogInfo[' + str(datetime.now()) + ']: ' + 'File: ' + logFile + ' Downloaded' )
     # Return log file
-    return send_from_directory(directory='log_download', filename = logFile ,
-                                attachment_filename= 'cdbCalculator' + '_' + str(datetime.now()) + '.log',
-                                as_attachment=True)
+    return send_from_directory(directory='log_download', filename = logFile, as_attachment=True)

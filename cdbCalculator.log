@@ -1,0 +1,211 @@
+LogInfo[2021-01-04 01:05:58.590865]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:06:02.257440]: Main Page Accessed ip:127.0.0.1
+Exception on / [POST]
+Traceback (most recent call last):
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Data\Test\2020.12.24 Gorila BackEnd Test\FlaskApp\App\app.py", line 51, in main_page
+    fromCalculator = cdbCalculator(str(request.form["date-start"]), float(request.form["cdbRate"]), str(request.form["date-end"]), filePath)
+  File "D:\Data\Test\2020.12.24 Gorila BackEnd Test\FlaskApp\App\processing.py", line 117, in cdbCalculator
+    with open('database_download/' + filePath, 'w+', newline = '') as result_file:
+OSError: [Errno 22] Invalid argument: 'database_download/results.2021-01-04 01:06:02.258439csv'
+LogInfo[2021-01-04 01:07:44.432685]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:07:47.035298]: Main Page Accessed ip:127.0.0.1
+Exception on / [POST]
+Traceback (most recent call last):
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Data\Test\2020.12.24 Gorila BackEnd Test\FlaskApp\App\app.py", line 51, in main_page
+    fromCalculator = cdbCalculator(str(request.form["date-start"]), float(request.form["cdbRate"]), str(request.form["date-end"]), filePath)
+  File "D:\Data\Test\2020.12.24 Gorila BackEnd Test\FlaskApp\App\processing.py", line 117, in cdbCalculator
+    with open('database_download/' + filePath, 'w+', newline = '') as result_file:
+OSError: [Errno 22] Invalid argument: 'database_download/results_2021-01-04 01:07:47.036300.csv'
+LogInfo[2021-01-04 01:09:40.855449]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:09:43.809606]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:09:43.839628]: User Input data -> Investment Date:2010-01-04, CDB Rate:100.0, Initial Value:R$1000, Evaluation Date:2019-12-03
+LogInfo[2021-01-04 01:09:43.841594]: Results -> Total Yield: 153.5%, Final Value: R$2534.99
+LogInfo[2021-01-04 01:09:50.452119]: File: results__2021.01.04_01.09.csv Downloaded
+LogInfo[2021-01-04 01:09:55.483145]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:09:55.526143]: User Input data -> Investment Date:2010-01-04, CDB Rate:100.0, Initial Value:R$1000, Evaluation Date:2019-12-03
+LogInfo[2021-01-04 01:09:55.527145]: Results -> Total Yield: 153.5%, Final Value: R$2534.99
+LogInfo[2021-01-04 01:11:01.710502]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:11:01.734530]: User Input data -> Investment Date:2014-04-04, CDB Rate:100.0, Initial Value:R$1000, Evaluation Date:2019-12-03
+LogInfo[2021-01-04 01:11:01.735496]: Results -> Total Yield: 72.34%, Final Value: R$1723.42
+LogInfo[2021-01-04 01:11:14.465141]: File: results__2021.01.04_01.11.csv Downloaded
+LogInfo[2021-01-04 01:11:28.156361]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:11:28.172354]: User Input data -> Investment Date:2017-10-04, CDB Rate:100.0, Initial Value:R$1000, Evaluation Date:2019-12-03
+LogInfo[2021-01-04 01:11:28.175358]: Results -> Total Yield: 14.27%, Final Value: R$1142.69
+LogInfo[2021-01-04 01:13:53.776364]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:14:04.596768]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:14:04.627762]: User Input data -> Investment Date:2010-01-04, CDB Rate:100.0, Initial Value:R$1000, Evaluation Date:2019-12-03
+LogInfo[2021-01-04 01:14:04.628764]: Results -> Total Yield: 153.5%, Final Value: R$2534.99
+LogInfo[2021-01-04 01:14:08.698873]: File: database_download/results__2021.01.04_01.14.csv Downloaded
+LogInfo[2021-01-04 01:14:48.781856]: File: results__2021.01.04_01.14.csv Downloaded
+LogInfo[2021-01-04 01:14:56.568506]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:15:02.211507]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:15:02.246503]: User Input data -> Investment Date:2010-01-04, CDB Rate:100.0, Initial Value:R$1000, Evaluation Date:2019-12-03
+LogInfo[2021-01-04 01:15:02.247505]: Results -> Total Yield: 153.5%, Final Value: R$2534.99
+LogInfo[2021-01-04 01:15:08.872511]: File: database_download/results__2021.01.04_01.15.csv Downloaded
+LogInfo[2021-01-04 01:16:02.335780]: Main Page Accessed ip:127.0.0.1
+Exception on / [GET]
+Traceback (most recent call last):
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Data\Test\2020.12.24 Gorila BackEnd Test\FlaskApp\App\app.py", line 99, in main_page
+    return render_template('line_chart2.html', legend=legend, legend2=legend2, downBtn='true', logFile = logFile)
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\flask\templating.py", line 137, in render_template
+    return _render(
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\flask\templating.py", line 120, in _render
+    rv = template.render(context)
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\jinja2\environment.py", line 1090, in render
+    self.environment.handle_exception()
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\jinja2\environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\jinja2\_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "D:\Data\Test\2020.12.24 Gorila BackEnd Test\FlaskApp\App\templates\line_chart2.html", line 159, in top-level template code
+    <p><form action="{{ url_for(filename=filename) }}">
+TypeError: url_for() missing 1 required positional argument: 'endpoint'
+LogInfo[2021-01-04 01:18:18.684227]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:18:24.430958]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:18:24.474965]: User Input data -> Investment Date:2010-01-04, CDB Rate:100.0, Initial Value:R$1000, Evaluation Date:2019-12-03
+LogInfo[2021-01-04 01:18:24.476960]: Results -> Total Yield: 153.5%, Final Value: R$2534.99
+LogInfo[2021-01-04 01:18:28.996348]: File: results__2021.01.04_01.18.csv Downloaded
+LogInfo[2021-01-04 01:18:32.682971]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:18:32.715965]: User Input data -> Investment Date:2010-01-04, CDB Rate:100.0, Initial Value:R$1000, Evaluation Date:2019-12-03
+LogInfo[2021-01-04 01:18:32.716965]: Results -> Total Yield: 153.5%, Final Value: R$2534.99
+LogInfo[2021-01-04 01:20:16.457720]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:20:22.094782]: Main Page Accessed ip:127.0.0.1
+Exception on / [POST]
+Traceback (most recent call last):
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Data\Test\2020.12.24 Gorila BackEnd Test\FlaskApp\App\app.py", line 48, in main_page
+    fromCalculator = cdbCalculator(str(request.form["date-start"]), float(request.form["cdbRate"]), str(request.form["date-end"]), filePath)
+UnboundLocalError: local variable 'filePath' referenced before assignment
+LogInfo[2021-01-04 01:22:00.490008]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:22:05.157527]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:22:05.189529]: User Input data -> Investment Date:2010-01-04, CDB Rate:100.0, Initial Value:R$1000, Evaluation Date:2019-12-03
+LogInfo[2021-01-04 01:22:05.190521]: Results -> Total Yield: 153.5%, Final Value: R$2534.99
+LogInfo[2021-01-04 01:22:11.031984]: File: results__2021.01.04_01.22.csv Downloaded
+LogInfo[2021-01-04 01:22:19.827687]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:22:19.844682]: User Input data -> Investment Date:2015-06-20, CDB Rate:100.0, Initial Value:R$1000, Evaluation Date:2019-12-03
+LogInfo[2021-01-04 01:22:19.845692]: Results -> Total Yield: 51.07%, Final Value: R$1510.7
+LogInfo[2021-01-04 01:22:43.201782]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:22:43.234782]: User Input data -> Investment Date:2010-01-04, CDB Rate:100.0, Initial Value:R$1000, Evaluation Date:2019-12-03
+LogInfo[2021-01-04 01:22:43.235783]: Results -> Total Yield: 153.5%, Final Value: R$2534.99
+LogInfo[2021-01-04 01:23:10.561890]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:23:10.586890]: User Input data -> Investment Date:2010-01-04, CDB Rate:100.0, Initial Value:R$1000, Evaluation Date:2016-10-03
+LogInfo[2021-01-04 01:23:10.588907]: Results -> Total Yield: 98.79%, Final Value: R$1987.92
+LogInfo[2021-01-04 01:23:27.928673]: File: results__2021.01.04_01.23.csv Downloaded
+LogInfo[2021-01-04 01:24:32.373041]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:24:35.779459]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:24:35.810452]: User Input data -> Investment Date:2010-01-04, CDB Rate:100.0, Initial Value:R$1000, Evaluation Date:2019-12-03
+LogInfo[2021-01-04 01:24:35.811455]: Results -> Total Yield: 153.5%, Final Value: R$2534.99
+LogInfo[2021-01-04 01:24:38.183457]: File: results__2021.01.04_01.24.35.csv Downloaded
+LogInfo[2021-01-04 01:24:49.190113]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:24:49.221122]: User Input data -> Investment Date:2010-01-04, CDB Rate:100.0, Initial Value:R$1000, Evaluation Date:2019-09-11
+LogInfo[2021-01-04 01:24:49.222118]: Results -> Total Yield: 150.53%, Final Value: R$2505.25
+LogInfo[2021-01-04 01:24:52.735115]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:24:52.766171]: User Input data -> Investment Date:2010-01-04, CDB Rate:100.0, Initial Value:R$1000, Evaluation Date:2019-12-03
+LogInfo[2021-01-04 01:24:52.767113]: Results -> Total Yield: 153.5%, Final Value: R$2534.99
+LogInfo[2021-01-04 01:24:54.920338]: File: results__2021.01.04_01.24.52.csv Downloaded
+LogInfo[2021-01-04 01:25:05.610136]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:25:05.634586]: User Input data -> Investment Date:2010-01-04, CDB Rate:100.0, Initial Value:R$1000, Evaluation Date:2016-10-03
+LogInfo[2021-01-04 01:25:05.636586]: Results -> Total Yield: 98.79%, Final Value: R$1987.92
+LogInfo[2021-01-04 01:25:08.018604]: File: results__2021.01.04_01.25.05.csv Downloaded
+LogInfo[2021-01-04 01:27:54.663832]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:28:10.088080]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:28:10.111059]: User Input data -> Investment Date:2014-07-04, CDB Rate:100.0, Initial Value:R$1000, Evaluation Date:2019-12-03
+LogInfo[2021-01-04 01:28:10.112057]: Results -> Total Yield: 68.12%, Final Value: R$1681.16
+Exception on /log_download/cdbCalculator.log [GET]
+Traceback (most recent call last):
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Data\Test\2020.12.24 Gorila BackEnd Test\FlaskApp\App\app.py", line 116, in log_download
+    copyfile('cdbCalculator.log', '/log_download/cdbCalculator'+ datetime.now().strftime("%Y.%m.%d_%H.%M.%S"))
+  File "d:\users\autaza\appdata\local\programs\python\python38\lib\shutil.py", line 259, in copyfile
+    with open(src, 'rb') as fsrc, open(dst, 'wb') as fdst:
+FileNotFoundError: [Errno 2] No such file or directory: '/log_download/cdbCalculator2021.01.04_01.28.13'
+LogInfo[2021-01-04 01:29:43.595328]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:29:53.759608]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:29:53.791719]: User Input data -> Investment Date:2010-01-04, CDB Rate:100.0, Initial Value:R$1000, Evaluation Date:2019-12-03
+LogInfo[2021-01-04 01:29:53.792723]: Results -> Total Yield: 153.5%, Final Value: R$2534.99
+LogInfo[2021-01-04 01:29:55.951802]: File: results__2021.01.04_01.29.53.csv Downloaded
+LogInfo[2021-01-04 01:29:59.949095]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:29:59.984091]: User Input data -> Investment Date:2010-01-04, CDB Rate:100.0, Initial Value:R$1000, Evaluation Date:2019-12-03
+LogInfo[2021-01-04 01:29:59.985089]: Results -> Total Yield: 153.5%, Final Value: R$2534.99
+LogInfo[2021-01-04 01:30:03.084094]: File: results__2021.01.04_01.29.59.csv Downloaded
+LogInfo[2021-01-04 01:30:04.798094]: File: cdbCalculator.log Downloaded
+LogInfo[2021-01-04 01:30:38.389677]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:30:43.518831]: File: cdbCalculator.log Downloaded
+LogInfo[2021-01-04 01:33:16.342565]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:33:18.880650]: File: cdbCalculator_2021.01.04_01.33.18.log Downloaded
+LogInfo[2021-01-04 01:33:33.853850]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:33:33.895864]: User Input data -> Investment Date:2010-01-04, CDB Rate:100.0, Initial Value:R$1000, Evaluation Date:2019-12-03
+LogInfo[2021-01-04 01:33:33.896848]: Results -> Total Yield: 153.5%, Final Value: R$2534.99
+LogInfo[2021-01-04 01:34:52.689009]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:34:52.723008]: User Input data -> Investment Date:2010-01-04, CDB Rate:100.0, Initial Value:R$1000, Evaluation Date:2019-12-03
+LogInfo[2021-01-04 01:34:52.724011]: Results -> Total Yield: 153.5%, Final Value: R$2534.99
+LogInfo[2021-01-04 01:34:57.339017]: File: results__2021.01.04_01.34.52.csv Downloaded
+LogInfo[2021-01-04 01:38:37.839112]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:38:37.869108]: User Input data -> Investment Date:2010-01-04, CDB Rate:100.0, Initial Value:R$1000, Evaluation Date:2019-12-03
+LogInfo[2021-01-04 01:38:37.871112]: Results -> Total Yield: 153.5%, Final Value: R$2534.99
+LogInfo[2021-01-04 01:41:34.780590]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:41:41.928322]: File: cdbCalculator_2021.01.04_01.41.41.log Downloaded
+LogInfo[2021-01-04 01:41:54.098708]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:42:03.021008]: File: cdbCalculator_2021.01.04_01.42.03.log Downloaded
+LogInfo[2021-01-04 01:42:38.996765]: Main Page Accessed ip:127.0.0.1
+LogInfo[2021-01-04 01:42:39.030770]: User Input data -> Investment Date:2010-01-04, CDB Rate:100.0, Initial Value:R$1000, Evaluation Date:2019-12-03
+LogInfo[2021-01-04 01:42:39.031767]: Results -> Total Yield: 153.5%, Final Value: R$2534.99
+LogInfo[2021-01-04 01:42:42.237798]: File: cdbCalculator_2021.01.04_01.42.42.log Downloaded
