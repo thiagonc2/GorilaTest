@@ -21,7 +21,7 @@ import glob, os
         # outputRates: the CDI of each day
         # totalYield: the total Yield in of the CDB at evaluation date
 
-debug = True
+debug = False
 
 def cdbCalculator(investmentDate, cdbRate, currentDate):
 

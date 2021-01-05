@@ -1,5 +1,10 @@
+#!/usr/bin/env python
+
+#### DESCRIPTION ####
 # Python Script to calculate a CDB invesment, considering the initial investment date, the CDB rate, ...
 # an evaluation date and the CDI daily rate from a csv file.
+# Programming Language: Python 3.8
+# Wep Framework: Flask 1.1.2 - Werkzeug 1.0.1
 
 __author__ = "Thiago Neves"
 __copyright__ = ""
@@ -9,17 +14,21 @@ __version__ = "1.0.0"
 __maintainer__ = "Thiago Neves"
 __email__ = "thiago.nc2@gmail.com"
 __status__ = "Prototype"
+__date__ = "2021-01-04"
 
+# Flask functions
 from flask import Flask, make_response, request, render_template, send_from_directory, jsonify
-from processing import cdbCalculator
 # converts string to datetime object and vice-versa
 import datetime
 # math for datetime objects
 from datetime import datetime, timedelta
+# Logging
 import logging
 from logging.handlers import RotatingFileHandler
+# File management
 import glob, os
 from shutil import copyfile
+from processing import cdbCalculator
 
 # Initiate App
 app = Flask(__name__)
